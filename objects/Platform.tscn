@@ -1,14 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://images/objects.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Platform.gd" type="Script" id=2]
+[ext_resource path="res://objects/Ball.tscn" type="PackedScene" id=3]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 12.568
-height = 106.054
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 12.4197, 63.9463 )
 
 [node name="Platform" type="KinematicBody2D"]
 script = ExtResource( 2 )
+ballScene = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -19,3 +20,6 @@ region_rect = Rect2( 0, 40, 128, 25 )
 visible = false
 rotation = 1.5708
 shape = SubResource( 1 )
+
+[node name="BallSpot" type="Position2D" parent="."]
+position = Vector2( 0, -25 )

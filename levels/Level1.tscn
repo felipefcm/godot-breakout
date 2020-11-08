@@ -1,8 +1,28 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://objects/Platform.tscn" type="PackedScene" id=1]
 
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 960, 40 )
+
 [node name="Level1" type="Node2D"]
 
+[node name="Background" type="Polygon2D" parent="."]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 0, 0, 1920, 0, 1920, 1080, 0, 1080 )
+
+[node name="Limits" type="StaticBody2D" parent="." groups=[
+"limits",
+]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Limits"]
+polygon = PoolVector2Array( 0, 0, 1920, 0, 1920, 1152, 1984, 1152, 1984, -64, -64, -64, -64, 1152, 0, 1152 )
+
+[node name="Hole" type="Area2D" parent="."]
+position = Vector2( 960, 1120 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hole"]
+shape = SubResource( 1 )
+
 [node name="Platform" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1024, 1024 )
+position = Vector2( 960, 1040 )

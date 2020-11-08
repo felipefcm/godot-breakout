@@ -1,24 +1,29 @@
 extends KinematicBody2D
 class_name Platform
 
-export (float) var maxSpeed = 500;
-export (float) var maxAcceleration = 100;
-export (float) var frictionCoefficient = 0.1;
-export (float) var inputAcceleration = 50;
+export (float) var maxSpeed = 1200
+export (PackedScene) var ballScene
 
-var velocity: Vector2 = Vector2.ZERO;
-var acceleration: Vector2 = Vector2.ZERO;
+var velocity: Vector2 = Vector2.ZERO
+onready var ballSpot: Position2D = $BallSpot
+
+func _ready():
+	var ball: Ball = ballScene.instance()
+	ball.position = ballSpot.position
+	add_child(ball);
 
 func _physics_process(delta):
 
-	var leftStr = Input.get_action_strength('ui_left');
-	var rightStr = Input.get_action_strength('ui_right');
+	var leftStr := Input.get_action_strength('ui_left')
+	var rightStr := Input.get_action_strength('ui_right')
 
-	var motionForce = Vector2(rightStr - leftStr, 0) * inputAcceleration * delta;
-	var dragForce = -velocity * frictionCoefficient * delta;
+	velocity.x = (rightStr - leftStr) * maxSpeed
 
-	acceleration = (acceleration + motionForce + dragForce).clamped(maxAcceleration);
-	velocity = (velocity + acceleration).clamped(maxSpeed);
-
-	print('Velocity ', velocity, ' acceleration ', acceleration);
-	move_and_collide(velocity * delta);
+	var collision := move_and_collide(velocity * delta)
+	if(collision): 
+		handleCollision(collision)
+		
+func handleCollision(collision):
+	var collider = collision.collider
+	if(!collider.is_in_group('limits')):
+		return
