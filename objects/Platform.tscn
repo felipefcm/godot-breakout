@@ -8,6 +8,8 @@
 extents = Vector2( 12.4197, 63.9463 )
 
 [node name="Platform" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource( 2 )
 ballScene = ExtResource( 3 )
 
