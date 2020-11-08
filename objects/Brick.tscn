@@ -13,6 +13,7 @@ region_enabled = true
 region_rect = Rect2( 0.039, 0, 90, 40 )
 
 [node name="SpriteBad" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 90, 0, 90, 40 )
