@@ -1,10 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://images/objects.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Brick.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 45, 20 )
+extents = Vector2( 100.035, 30.1059 )
 
 [node name="Brick" type="StaticBody2D" groups=[
 "bricks",
@@ -12,16 +11,9 @@ extents = Vector2( 45, 20 )
 collision_layer = 16
 script = ExtResource( 2 )
 
-[node name="SpriteOk" type="Sprite" parent="."]
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 0.039, 0, 90, 40 )
-
-[node name="SpriteBad" type="Sprite" parent="."]
-visible = false
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 90, 0, 90, 40 )
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color( 0.164706, 0.615686, 0.560784, 1 )
+polygon = PoolVector2Array( -100, -30, 100, -30, 100, 30, -100, 30 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

@@ -1,11 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://images/objects.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Platform.gd" type="Script" id=2]
 [ext_resource path="res://objects/Ball.tscn" type="PackedScene" id=3]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 12.4197, 63.9463 )
 
 [node name="Platform" type="KinematicBody2D"]
 collision_layer = 2
@@ -13,15 +9,13 @@ collision_mask = 5
 script = ExtResource( 2 )
 ballScene = ExtResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 0, 40, 128, 25 )
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color( 0.905882, 0.435294, 0.317647, 1 )
+polygon = PoolVector2Array( -63.6773, -12.2958, 64.1085, -12.2958, 88.1179, 0.204971, 64.3069, 12.7058, -64.0742, 12.7058, -87.8852, 0.204971 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
-rotation = 1.5708
-shape = SubResource( 1 )
+polygon = PoolVector2Array( -63.4789, -12.0974, 64.1085, -12.0974, 88.1179, 0.204971, 64.5053, 12.7058, -64.0742, 12.9042, -87.6868, 0.00654602 )
 
 [node name="BallSpot" type="Position2D" parent="."]
-position = Vector2( 0, -25 )
+position = Vector2( 0, -17.3212 )

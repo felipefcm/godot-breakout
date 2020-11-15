@@ -1,7 +1,9 @@
 extends KinematicBody2D
 class_name Platform
 
-export (float) var maxSpeed = 1200
+export (float) var acceleration = 2000;
+export (float) var friction = 2200;
+export (float) var maxSpeed = 1000
 export (PackedScene) var ballScene
 
 var velocity: Vector2 = Vector2.ZERO
@@ -26,8 +28,7 @@ func _unhandled_key_input(event: InputEventKey):
 	
 	if(event.is_action_pressed('ui_select') && ballAnchored):
 		launchBall()
-	
-	get_tree().set_input_as_handled()
+		get_tree().set_input_as_handled()
 
 func launchBall():
 	
@@ -43,10 +44,15 @@ func launchBall():
 
 func _physics_process(delta: float):
 
-	var leftStr := Input.get_action_strength('ui_left')
-	var rightStr := Input.get_action_strength('ui_right')
+	var inputStr := Input.get_action_strength('ui_right') - Input.get_action_strength('ui_left')
 
-	velocity.x = (rightStr - leftStr) * maxSpeed
+	if(inputStr != 0):
+		velocity.x += inputStr * acceleration * delta
+		velocity = velocity.clamped(maxSpeed)
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+
+	print('Velocity ', velocity.x)
 
 	var collision := move_and_collide(velocity * delta)
 	if(collision): 
@@ -56,5 +62,5 @@ func handleCollision(collision: KinematicCollision2D):
 	
 	var collider = collision.collider
 	
-	if(!collider.is_in_group('limits')):
-		return
+	if(collider.is_in_group('limits')):
+		velocity.x = 0

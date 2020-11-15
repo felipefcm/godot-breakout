@@ -42,6 +42,11 @@ config/name="breakout"
 run/main_scene="res://levels/Level1.tscn"
 config/icon="res://icon.png"
 
+[debug]
+
+gdscript/warnings/unused_argument=false
+gdscript/warnings/return_value_discarded=false
+
 [display]
 
 window/size/width=1920

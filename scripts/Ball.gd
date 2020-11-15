@@ -24,4 +24,4 @@ func _physics_process(delta: float):
 
 		if(collider.is_in_group('bricks')):
 			var brick = collider as Brick
-			var destroyed = brick.hit()
+			brick.hit()
